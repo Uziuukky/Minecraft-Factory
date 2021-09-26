@@ -1,1 +1,0 @@
-tag @e[tag=spike] remove operate
