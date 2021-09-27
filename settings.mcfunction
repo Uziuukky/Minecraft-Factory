@@ -1,4 +1,4 @@
-12 scoreboard objectives add conveyorIUF dummy
+scoreboard objectives add conveyorIUF dummy
 scoreboard objectives add supporterIUF dummy
 scoreboard objectives add craftingIUF dummy
 scoreboard objectives add loggerIUF dummy
