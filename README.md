@@ -1,2 +1,2 @@
-# Minecraft-Factory
-마공장!
+# Minecraft-Factory-0.1
+직접배치
