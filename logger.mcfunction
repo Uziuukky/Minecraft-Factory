@@ -1,4 +1,5 @@
 kill @e[tag=loggerSBF]
+kill @e[tag=loggerFF]
 
 execute as @a[tag=playF,nbt={SelectedItem:{id:"minecraft:grindstone",tag:{Logger:1b}}},y_rotation=135.1..-135] at @s anchored eyes positioned ^ ^ ^3 align xyz run summon falling_block ~0.5 ~ ~0.5 {BlockState:{Name:"minecraft:grindstone",Properties:{facing:"south"}},NoGravity:1b,HasVisualFire:0b,Time:1,Tags:["loggerSBF"]}
 execute as @a[tag=playF,nbt={SelectedItem:{id:"minecraft:grindstone",tag:{Logger:1b}}},y_rotation=-134.9..-45.1] at @s anchored eyes positioned ^ ^ ^3 align xyz run summon falling_block ~0.5 ~ ~0.5 {BlockState:{Name:"minecraft:grindstone",Properties:{facing:"west"}},NoGravity:1b,HasVisualFire:0b,Time:1,Tags:["loggerSBF"]}
@@ -27,7 +28,7 @@ execute as @a[tag=playF,nbt={Inventory:[{id:"minecraft:grindstone",Slot:-106b,ta
 execute as @e[tag=loggerAF] at @s if block ~ ~ ~ air run kill @s
 execute as @e[tag=loggerFF] at @s if block ~ ~ ~ air run kill @s
 
-kill @e[tag=loggerFF]
+
 execute as @e[tag=loggerAWF] at @s align xyz run summon falling_block ~0.5 ~ ~0.5 {BlockState:{Name:"minecraft:grindstone",Properties:{facing:"east"}},NoGravity:1b,HasVisualFire:0b,Time:1,Tags:["loggerFF"]}
 execute as @e[tag=loggerANF] at @s align xyz run summon falling_block ~0.5 ~ ~0.5 {BlockState:{Name:"minecraft:grindstone",Properties:{facing:"south"}},NoGravity:1b,HasVisualFire:0b,Time:1,Tags:["loggerFF"]}
 execute as @e[tag=loggerAEF] at @s align xyz run summon falling_block ~0.5 ~ ~0.5 {BlockState:{Name:"minecraft:grindstone",Properties:{facing:"west"}},NoGravity:1b,HasVisualFire:0b,Time:1,Tags:["loggerFF"]}
