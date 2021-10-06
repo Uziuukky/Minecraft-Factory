@@ -1,5 +1,5 @@
 kill @e[tag=conveyorSBF]
-kill @e[tag=conveyorSIF]
+kill @e[tag=conveyorSIF
 
 execute as @a[tag=playF,nbt={SelectedItem:{id:"minecraft:smooth_stone_slab",tag:{Conveyor:1b}}}] at @s anchored eyes positioned ^ ^ ^3 align xyz run summon falling_block ~0.5 ~ ~0.5 {BlockState:{Name:"minecraft:polished_diorite_slab",Properties:{type:"top"}},NoGravity:1b,HasVisualFire:0b,Time:1,Tags:["conveyorSBF"]}
 execute as @a[tag=playF,nbt={SelectedItem:{id:"minecraft:smooth_stone_slab",tag:{Conveyor:1b}}},y_rotation=135.1..-135] at @s anchored eyes positioned ^ ^ ^3 run summon item_frame ~ ~1 ~ {NoGravity:1b,Facing:1b,Fixed:1b,ItemRotation:3b,Invulnerable:1b,Invisible:1b,Tags:["conveyorSIF"],Item:{id:"minecraft:stone_stairs",Count:1b}}
