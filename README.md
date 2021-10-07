@@ -1,2 +1,3 @@
-# Minecraft-Factory-0.1
-직접배치
+# Minecraft-Factory
+🏭직접배치
+🏭아이템제조
