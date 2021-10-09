@@ -29,7 +29,6 @@ execute as @e[tag=itemF] at @s if entity @e[tag=arrowF,nbt={ItemRotation:1b},dis
 execute as @e[tag=itemF] at @s if entity @e[tag=arrowF,nbt={ItemRotation:3b},distance=0..0.05,tag=!stopCF] run scoreboard players set @s rotationF 2
 execute as @e[tag=itemF] at @s if entity @e[tag=arrowF,nbt={ItemRotation:5b},distance=0..0.05,tag=!stopCF] run scoreboard players set @s rotationF 3
 execute as @e[tag=itemF] at @s if entity @e[tag=arrowF,nbt={ItemRotation:7b},distance=0..0.05,tag=!stopCF] run scoreboard players set @s rotationF 4
-execute as @e[tag=itemF] at @s if entity @e[tag=stopCF,distance=0..0.05] run scoreboard players set @s rotationF 0
 
 execute as @e[tag=arrowF,nbt={ItemRotation:1b}] run scoreboard players set @s rotationIF 1
 execute as @e[tag=arrowF,nbt={ItemRotation:3b}] run scoreboard players set @s rotationIF 2
@@ -41,24 +40,28 @@ execute as @e[tag=arrowF,nbt={ItemRotation:2b}] at @s run data merge entity @s {
 execute as @e[tag=arrowF,nbt={ItemRotation:4b}] at @s run data merge entity @s {ItemRotation:5b}
 execute as @e[tag=arrowF,nbt={ItemRotation:6b}] at @s run data merge entity @s {ItemRotation:7b}
 
-execute as @e[tag=itemF] at @s if score @s rotationF matches 1 run tp @s ~-0.05 ~ ~
-execute as @e[tag=itemF] at @s if score @s rotationF matches 2 run tp @s ~ ~ ~-0.05
-execute as @e[tag=itemF] at @s if score @s rotationF matches 3 run tp @s ~0.05 ~ ~
-execute as @e[tag=itemF] at @s if score @s rotationF matches 4 run tp @s ~ ~ ~0.05
+execute as @e[tag=itemF,tag=!stopMF] at @s if score @s rotationF matches 1 run tp @s ~-0.05 ~ ~
+execute as @e[tag=itemF,tag=!stopMF] at @s if score @s rotationF matches 2 run tp @s ~ ~ ~-0.05
+execute as @e[tag=itemF,tag=!stopMF] at @s if score @s rotationF matches 3 run tp @s ~0.05 ~ ~
+execute as @e[tag=itemF,tag=!stopMF] at @s if score @s rotationF matches 4 run tp @s ~ ~ ~0.05
 
 execute as @e[tag=arrowF] at @s if block ~ ~-1 ~ air run kill @s
 execute as @e[tag=arrowF] at @s unless block ~ ~ ~ air run kill @s
 execute as @e[tag=itemF] at @s if block ~ ~-1 ~ air run kill @s
 
-execute as @e[tag=arrowF,scores={rotationIF=1},tag=!stopCF] at @s if block ~-1 ~-1 ~ air run tag @s add stopCF
-execute as @e[tag=arrowF,scores={rotationIF=2},tag=!stopCF] at @s if block ~ ~-1 ~-1 air run tag @s add stopCF
-execute as @e[tag=arrowF,scores={rotationIF=3},tag=!stopCF] at @s if block ~1 ~-1 ~ air run tag @s add stopCF
-execute as @e[tag=arrowF,scores={rotationIF=4},tag=!stopCF] at @s if block ~ ~-1 ~1 air run tag @s add stopCF
+execute as @e[tag=itemF,tag=!stopMF] at @s if entity @e[tag=stopCF,tag=arrowF,distance=0..0.05] run tag @s add stopMF
 
-execute as @e[tag=arrowF,scores={rotationIF=1},tag=stopCF] at @s if block ~-1 ~-1 ~ smooth_stone_slab positioned ~-1 ~ ~ if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopCF
-execute as @e[tag=arrowF,scores={rotationIF=2},tag=stopCF] at @s if block ~ ~-1 ~-1 smooth_stone_slab positioned ~ ~ ~-1 if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopCF
-execute as @e[tag=arrowF,scores={rotationIF=3},tag=stopCF] at @s if block ~1 ~-1 ~ smooth_stone_slab positioned ~1 ~ ~ if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopCF
-execute as @e[tag=arrowF,scores={rotationIF=4},tag=stopCF] at @s if block ~ ~-1 ~1 smooth_stone_slab positioned ~ ~ ~1 if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopCF
+execute as @e[tag=itemF,tag=stopMF] at @s if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopMF
+
+execute as @e[tag=arrowF,scores={rotationIF=1},tag=!stopCF] at @s unless block ~-1 ~-1 ~ smooth_stone_slab if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s add stopCF
+execute as @e[tag=arrowF,scores={rotationIF=2},tag=!stopCF] at @s unless block ~ ~-1 ~-1 smooth_stone_slab if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s add stopCF
+execute as @e[tag=arrowF,scores={rotationIF=3},tag=!stopCF] at @s unless block ~1 ~-1 ~ smooth_stone_slab if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s add stopCF
+execute as @e[tag=arrowF,scores={rotationIF=4},tag=!stopCF] at @s unless block ~ ~-1 ~1 smooth_stone_slab if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s add stopCF
+
+execute as @e[tag=arrowF,scores={rotationIF=1},tag=stopCF] at @s if block ~-1 ~-1 ~ smooth_stone_slab positioned ~-1 ~ ~ unless entity @e[tag=stopMF,tag=itemF,distance=0..0.05] run tag @s remove stopCF
+execute as @e[tag=arrowF,scores={rotationIF=2},tag=stopCF] at @s if block ~ ~-1 ~-1 smooth_stone_slab positioned ~ ~ ~-1 unless entity @e[tag=stopMF,tag=itemF,distance=0..0.05] run tag @s remove stopCF
+execute as @e[tag=arrowF,scores={rotationIF=3},tag=stopCF] at @s if block ~1 ~-1 ~ smooth_stone_slab positioned ~1 ~ ~ unless entity @e[tag=stopMF,tag=itemF,distance=0..0.05] run tag @s remove stopCF
+execute as @e[tag=arrowF,scores={rotationIF=4},tag=stopCF] at @s if block ~ ~-1 ~1 smooth_stone_slab positioned ~ ~ ~1 unless entity @e[tag=stopMF,tag=itemF,distance=0..0.05] run tag @s remove stopCF
 
 execute as @e[tag=arrowF,scores={rotationIF=1},tag=!stopCF] at @s positioned ~-1 ~ ~ if entity @e[tag=stopCF,tag=arrowF,distance=0..0.05] if entity @e[tag=itemF,distance=0..0.05] run tag @s add stopCF
 execute as @e[tag=arrowF,scores={rotationIF=2},tag=!stopCF] at @s positioned ~ ~ ~-1 if entity @e[tag=stopCF,tag=arrowF,distance=0..0.05] if entity @e[tag=itemF,distance=0..0.05] run tag @s add stopCF
@@ -69,6 +72,11 @@ execute as @e[tag=arrowF,scores={rotationIF=1},tag=stopCF] at @s positioned ~-1 
 execute as @e[tag=arrowF,scores={rotationIF=2},tag=stopCF] at @s positioned ~ ~ ~-1 if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopCF
 execute as @e[tag=arrowF,scores={rotationIF=3},tag=stopCF] at @s positioned ~1 ~ ~ if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopCF
 execute as @e[tag=arrowF,scores={rotationIF=4},tag=stopCF] at @s positioned ~ ~ ~1 if entity @e[tag=!stopCF,tag=arrowF,distance=0..0.05] run tag @s remove stopCF
+
+execute as @e[tag=arrowF,scores={rotationIF=1},tag=stopCF] at @s positioned ~-1 ~ ~ if entity @e[tag=arrowF,scores={rotationIF=3},distance=0..0.05] run tag @s remove stopCF
+execute as @e[tag=arrowF,scores={rotationIF=2},tag=stopCF] at @s positioned ~ ~ ~-1 if entity @e[tag=arrowF,scores={rotationIF=4},distance=0..0.05] run tag @s remove stopCF
+execute as @e[tag=arrowF,scores={rotationIF=3},tag=stopCF] at @s positioned ~1 ~ ~ if entity @e[tag=arrowF,scores={rotationIF=1},distance=0..0.05] run tag @s remove stopCF
+execute as @e[tag=arrowF,scores={rotationIF=4},tag=stopCF] at @s positioned ~ ~ ~1 if entity @e[tag=arrowF,scores={rotationIF=2},distance=0..0.05] run tag @s remove stopCF
 
 execute as @e[tag=arrowF,scores={rotationIF=1},tag=stopCF] at @s if block ~-1 ~-1 ~ minecraft:scaffolding if block ~-1 ~ ~ minecraft:crafting_table run tag @s remove stopCF
 execute as @e[tag=arrowF,scores={rotationIF=2},tag=stopCF] at @s if block ~ ~-1 ~-1 minecraft:scaffolding if block ~ ~ ~-1 minecraft:crafting_table run tag @s remove stopCF
